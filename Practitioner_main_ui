@@ -15,7 +15,7 @@ class PractitionerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.poppinsTextTheme(), // ✅ Apply Poppins globally
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       home: const PractitionerDashboard(),
     );
@@ -34,7 +34,6 @@ class PractitionerDashboard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title
               Text(
                 "Practitioner Dashboard",
                 style: GoogleFonts.poppins(
@@ -49,8 +48,6 @@ class PractitionerDashboard extends StatelessWidget {
                     color: Colors.black, fontSize: 16),
               ),
               const SizedBox(height: 20),
-
-              // Smart Notifications Card
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -95,8 +92,6 @@ class PractitionerDashboard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Upcoming Appointments Card
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -139,8 +134,6 @@ class PractitionerDashboard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Quick Therapy Planner
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -179,8 +172,6 @@ class PractitionerDashboard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Recent Patients
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -211,8 +202,6 @@ class PractitionerDashboard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Patient Overview
               Text(
                 "Patient Overview",
                 style: GoogleFonts.poppins(
@@ -263,8 +252,6 @@ class PractitionerDashboard extends StatelessWidget {
           ),
         ),
       ),
-
-      // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -287,7 +274,6 @@ class PractitionerDashboard extends StatelessWidget {
     );
   }
 
-  // Reusable Planner Buttons
   static Widget _buildPlannerButton(
       IconData icon, String text, Color color, Color textColor) {
     return ElevatedButton.icon(
@@ -310,7 +296,6 @@ class PractitionerDashboard extends StatelessWidget {
   }
 }
 
-// Recent Patients Custom Tile
 class _RecentPatientTile extends StatelessWidget {
   final String initials;
   final String name;
@@ -343,3 +328,4 @@ class _RecentPatientTile extends StatelessWidget {
     );
   }
 }
+
