@@ -1,0 +1,345 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+void main() {
+  runApp(const PractitionerApp());
+}
+
+class PractitionerApp extends StatelessWidget {
+  const PractitionerApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Practitioner Dashboard',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.poppinsTextTheme(), // ✅ Apply Poppins globally
+      ),
+      home: const PractitionerDashboard(),
+    );
+  }
+}
+
+class PractitionerDashboard extends StatelessWidget {
+  const PractitionerDashboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              Text(
+                "Practitioner Dashboard",
+                style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Monitor your patients and therapy sessions!",
+                style: GoogleFonts.poppins(
+                    color: Colors.black, fontSize: 16),
+              ),
+              const SizedBox(height: 20),
+
+              // Smart Notifications Card
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Smart Notifications",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            const Icon(Icons.notifications_active,
+                                color: Colors.red, size: 30),
+                          ],
+                        ),
+                        Text(
+                          "2 missed appointments",
+                          style: GoogleFonts.poppins(
+                              color: Colors.red, fontSize: 14),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "3 therapy reminders",
+                              style: GoogleFonts.poppins(fontSize: 14),
+                            ),
+                            const Spacer(),
+                            Text(
+                              "View More",
+                              style: GoogleFonts.poppins(fontSize: 12),
+                            )
+                          ],
+                        ),
+                      ]),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Upcoming Appointments Card
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Upcoming Appointments",
+                        style: GoogleFonts.poppins(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          const Icon(Icons.event, color: Colors.red),
+                          const SizedBox(width: 8),
+                          Text(
+                            "Aarav Singh - Virechana - 11:00 AM",
+                            style: GoogleFonts.poppins(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          const Icon(Icons.event, color: Colors.red),
+                          const SizedBox(width: 8),
+                          Text(
+                            "Meera Patel - 2:00 PM",
+                            style: GoogleFonts.poppins(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Quick Therapy Planner
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Quick Therapy Planner",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 3,
+                          children: [
+                            _buildPlannerButton(Icons.add, "New Appointment",
+                                Colors.blue, Colors.white),
+                            _buildPlannerButton(Icons.history, "History",
+                                Colors.green, Colors.white),
+                            _buildPlannerButton(Icons.schedule,
+                                "Today's Schedule", Colors.orange, Colors.white),
+                            _buildPlannerButton(Icons.people, "Patient Groups",
+                                Colors.blueGrey, Colors.white),
+                          ],
+                        ),
+                      ]),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Recent Patients
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Recent Patients",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        const _RecentPatientTile(
+                          initials: "RS",
+                          name: "Sumit Sharma",
+                          therapy: "Vaman",
+                        ),
+                        const Divider(),
+                        const _RecentPatientTile(
+                          initials: "PM",
+                          name: "Sneha Gupta",
+                          therapy: "Basti",
+                        ),
+                      ]),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Patient Overview
+              Text(
+                "Patient Overview",
+                style: GoogleFonts.poppins(
+                    fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.check_circle, color: Colors.green),
+                          const SizedBox(width: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Arjun Nair",
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              Text(
+                                "Needs Attention",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13, color: Colors.black54),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      Text(
+                        "Next visit: 08/15/2024",
+                        style: GoogleFonts.poppins(
+                            fontSize: 13, color: Colors.black54),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      // Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.people_outline),
+            label: "Patients",
+            tooltip: "Patients",
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.assignment),
+            label: "Therapy Plans",
+            tooltip: "Therapy Plans",
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.schedule_send),
+            label: "Rescheduble",
+            tooltip: "Rescheduble",
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Reusable Planner Buttons
+  static Widget _buildPlannerButton(
+      IconData icon, String text, Color color, Color textColor) {
+    return ElevatedButton.icon(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        elevation: 1,
+        backgroundColor: Colors.white,
+        foregroundColor: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: color.withOpacity(0.5)),
+        ),
+      ),
+      icon: Icon(icon, size: 20),
+      label: Text(
+        text,
+        style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),
+      ),
+    );
+  }
+}
+
+// Recent Patients Custom Tile
+class _RecentPatientTile extends StatelessWidget {
+  final String initials;
+  final String name;
+  final String therapy;
+
+  const _RecentPatientTile(
+      {required this.initials, required this.name, required this.therapy});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CircleAvatar(
+          child: Text(initials,
+              style: GoogleFonts.poppins(
+                  fontSize: 13, fontWeight: FontWeight.bold)),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name,
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(therapy,
+                style: GoogleFonts.poppins(color: Colors.black54)),
+          ],
+        )
+      ],
+    );
+  }
+}
