@@ -1,331 +1,165 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(const PractitionerApp());
-}
+void main() => runApp(const PractitionerApp());
 
 class PractitionerApp extends StatelessWidget {
   const PractitionerApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Practitioner Dashboard',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
-      home: const PractitionerDashboard(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Practitioner Dashboard',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: GoogleFonts.poppinsTextTheme(),
+        ),
+        home: const PractitionerDashboard(),
+      );
 }
 
 class PractitionerDashboard extends StatelessWidget {
   const PractitionerDashboard({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Practitioner Dashboard",
-                style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "Monitor your patients and therapy sessions!",
-                style: GoogleFonts.poppins(
-                    color: Colors.black, fontSize: 16),
-              ),
-              const SizedBox(height: 20),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Smart Notifications",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            const Icon(Icons.notifications_active,
-                                color: Colors.red, size: 30),
-                          ],
-                        ),
-                        Text(
-                          "2 missed appointments",
-                          style: GoogleFonts.poppins(
-                              color: Colors.red, fontSize: 14),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "3 therapy reminders",
-                              style: GoogleFonts.poppins(fontSize: 14),
-                            ),
-                            const Spacer(),
-                            Text(
-                              "View More",
-                              style: GoogleFonts.poppins(fontSize: 12),
-                            )
-                          ],
-                        ),
-                      ]),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _title("Practitioner Dashboard", 24, FontWeight.bold),
+                _text("Monitor your patients and therapy sessions!"),
+                _gap(),
+                _card([
+                  _rowTitle("Smart Notifications", Icons.notifications_active, Colors.red),
+                  _text("2 missed appointments", color: Colors.red),
+                  _rowText("3 therapy reminders", "View More")
+                ]),
+                _gap(),
+                _card([
+                  _title("Upcoming Appointments"),
+                  _appt("Aarav Singh - Virechana - 11:00 AM"),
+                  _appt("Meera Patel - 2:00 PM"),
+                ]),
+                _gap(),
+                _card([
+                  _title("Quick Therapy Planner"),
+                  GridView.count(
+                    crossAxisCount: 2,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    childAspectRatio: 3,
                     children: [
-                      Text(
-                        "Upcoming Appointments",
-                        style: GoogleFonts.poppins(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          const Icon(Icons.event, color: Colors.red),
-                          const SizedBox(width: 8),
-                          Text(
-                            "Aarav Singh - Virechana - 11:00 AM",
-                            style: GoogleFonts.poppins(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Row(
-                        children: [
-                          const Icon(Icons.event, color: Colors.red),
-                          const SizedBox(width: 8),
-                          Text(
-                            "Meera Patel - 2:00 PM",
-                            style: GoogleFonts.poppins(),
-                          ),
-                        ],
-                      ),
+                      _planner(Icons.add, "New Appointment", Colors.blue),
+                      _planner(Icons.history, "History", Colors.green),
+                      _planner(Icons.schedule, "Today's Schedule", Colors.orange),
+                      _planner(Icons.people, "Patient Groups", Colors.blueGrey),
                     ],
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Quick Therapy Planner",
-                          style: GoogleFonts.poppins(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                        GridView.count(
-                          crossAxisCount: 2,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
-                          childAspectRatio: 3,
-                          children: [
-                            _buildPlannerButton(Icons.add, "New Appointment",
-                                Colors.blue, Colors.white),
-                            _buildPlannerButton(Icons.history, "History",
-                                Colors.green, Colors.white),
-                            _buildPlannerButton(Icons.schedule,
-                                "Today's Schedule", Colors.orange, Colors.white),
-                            _buildPlannerButton(Icons.people, "Patient Groups",
-                                Colors.blueGrey, Colors.white),
-                          ],
-                        ),
-                      ]),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Recent Patients",
-                          style: GoogleFonts.poppins(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 10),
-                        const _RecentPatientTile(
-                          initials: "RS",
-                          name: "Sumit Sharma",
-                          therapy: "Vaman",
-                        ),
-                        const Divider(),
-                        const _RecentPatientTile(
-                          initials: "PM",
-                          name: "Sneha Gupta",
-                          therapy: "Basti",
-                        ),
-                      ]),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                "Patient Overview",
-                style: GoogleFonts.poppins(
-                    fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
+                ]),
+                _gap(),
+                _card(const [
+                  _RecentPatient("RS", "Sumit Sharma", "Vaman"),
+                  Divider(),
+                  _RecentPatient("PM", "Sneha Gupta", "Basti"),
+                ], title: "Recent Patients"),
+                _gap(),
+                _title("Patient Overview"),
+                _card([
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.check_circle, color: Colors.green),
-                          const SizedBox(width: 8),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Arjun Nair",
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                              Text(
-                                "Needs Attention",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 13, color: Colors.black54),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                      Text(
-                        "Next visit: 08/15/2024",
-                        style: GoogleFonts.poppins(
-                            fontSize: 13, color: Colors.black54),
-                      )
+                      Row(children: [
+                        const Icon(Icons.check_circle, color: Colors.green),
+                        const SizedBox(width: 8),
+                        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          _title("Arjun Nair", 15, FontWeight.bold),
+                          _text("Needs Attention", color: Colors.black54, size: 13),
+                        ])
+                      ]),
+                      _text("Next visit: 08/15/2024", color: Colors.black54, size: 13)
                     ],
-                  ),
-                ),
-              ),
-            ],
+                  )
+                ]),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.people_outline),
-            label: "Patients",
-            tooltip: "Patients",
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.assignment),
-            label: "Therapy Plans",
-            tooltip: "Therapy Plans",
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.schedule_send),
-            label: "Rescheduble",
-            tooltip: "Rescheduble",
-          ),
-        ],
-      ),
-    );
-  }
+        bottomNavigationBar: BottomNavigationBar(items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.people_outline), label: "Patients"),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Therapy Plans"),
+          BottomNavigationBarItem(icon: Icon(Icons.schedule_send), label: "Rescheduble"),
+        ]),
+      );
 
-  static Widget _buildPlannerButton(
-      IconData icon, String text, Color color, Color textColor) {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        elevation: 1,
-        backgroundColor: Colors.white,
-        foregroundColor: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: color.withOpacity(0.5)),
+  // ---------- Helpers ----------
+  static Widget _gap([double h = 20]) => SizedBox(height: h);
+
+  static Widget _title(String t, [double s = 16, FontWeight w = FontWeight.bold]) =>
+      Text(t, style: GoogleFonts.poppins(fontSize: s, fontWeight: w));
+
+  static Widget _text(String t, {Color color = Colors.black, double size = 14}) =>
+      Text(t, style: GoogleFonts.poppins(fontSize: size, color: color));
+
+  static Widget _rowTitle(String t, IconData i, Color c) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [_title(t), Icon(i, color: c, size: 30)],
+      );
+
+  static Widget _rowText(String left, String right) => Row(
+        children: [_text(left), const Spacer(), _text(right, size: 12)],
+      );
+
+  static Widget _appt(String t) =>
+      Row(children: [const Icon(Icons.event, color: Colors.red), const SizedBox(width: 8), _text(t)]);
+
+  static Widget _planner(IconData i, String t, Color c) => ElevatedButton.icon(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          elevation: 1,
+          backgroundColor: Colors.white,
+          foregroundColor: c,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: c.withOpacity(0.5)),
+          ),
         ),
-      ),
-      icon: Icon(icon, size: 20),
-      label: Text(
-        text,
-        style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),
-      ),
-    );
-  }
+        icon: Icon(i, size: 20),
+        label: _text(t),
+      );
+
+  static Widget _card(List<Widget> children, {String? title}) => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [if (title != null) _title(title), ...children]),
+        ),
+      );
 }
 
-class _RecentPatientTile extends StatelessWidget {
-  final String initials;
-  final String name;
-  final String therapy;
-
-  const _RecentPatientTile(
-      {required this.initials, required this.name, required this.therapy});
+// ---------- Patient Tile ----------
+class _RecentPatient extends StatelessWidget {
+  final String initials, name, therapy;
+  const _RecentPatient(this.initials, this.name, this.therapy);
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CircleAvatar(
-          child: Text(initials,
-              style: GoogleFonts.poppins(
-                  fontSize: 13, fontWeight: FontWeight.bold)),
-        ),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name,
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 15)),
-            Text(therapy,
-                style: GoogleFonts.poppins(color: Colors.black54)),
-          ],
-        )
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Row(
+        children: [
+          CircleAvatar(child: Text(initials, style: GoogleFonts.poppins(fontWeight: FontWeight.bold))),
+          const SizedBox(width: 12),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(name, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(therapy, style: GoogleFonts.poppins(color: Colors.black54)),
+          ])
+        ],
+      );
 }
+
 
