@@ -40,12 +40,14 @@ class PractitionerDashboard extends StatelessWidget {
                 _gap(),
                 _card([
                   _title("Upcoming Appointments"),
+                  SizedBox(height: 10,),
                   _appt("Aarav Singh - Virechana - 11:00 AM"),
                   _appt("Meera Patel - 2:00 PM"),
                 ]),
                 _gap(),
                 _card([
                   _title("Quick Therapy Planner"),
+                  SizedBox(height: 10,),
                   GridView.count(
                     crossAxisCount: 2,
                     shrinkWrap: true,
@@ -54,7 +56,7 @@ class PractitionerDashboard extends StatelessWidget {
                     crossAxisSpacing: 12,
                     childAspectRatio: 3,
                     children: [
-                      _planner(Icons.add, "New Appointment", Colors.blue),
+                      _planner(Icons.add, "New Session", Colors.blue),
                       _planner(Icons.history, "History", Colors.green),
                       _planner(Icons.schedule, "Today's Schedule", Colors.orange),
                       _planner(Icons.people, "Patient Groups", Colors.blueGrey),
@@ -63,6 +65,7 @@ class PractitionerDashboard extends StatelessWidget {
                 ]),
                 _gap(),
                 _card(const [
+                  SizedBox(height: 10,),
                   _RecentPatient("RS", "Sumit Sharma", "Vaman"),
                   Divider(),
                   _RecentPatient("PM", "Sneha Gupta", "Basti"),
@@ -103,7 +106,7 @@ class PractitionerDashboard extends StatelessWidget {
       Text(t, style: GoogleFonts.poppins(fontSize: s, fontWeight: w));
 
   static Widget _text(String t, {Color color = Colors.black, double size = 14}) =>
-      Text(t, style: GoogleFonts.poppins(fontSize: size, color: color));
+      Text(t, style: GoogleFonts.poppins(fontSize: size, color: color),textAlign: TextAlign.center,);
 
   static Widget _rowTitle(String t, IconData i, Color c) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -117,7 +120,7 @@ class PractitionerDashboard extends StatelessWidget {
   static Widget _appt(String t) =>
       Row(children: [const Icon(Icons.event, color: Colors.red), const SizedBox(width: 8), _text(t)]);
 
-  static Widget _planner(IconData i, String t, Color c) => ElevatedButton.icon(
+  static Widget _planner(IconData i, String t, Color c,) => ElevatedButton.icon(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           elevation: 1,
@@ -132,7 +135,8 @@ class PractitionerDashboard extends StatelessWidget {
         label: _text(t),
       );
 
-  static Widget _card(List<Widget> children, {String? title}) => Card(
+  static Widget _card(List<Widget> children, {String? title} ) => Card(
+    
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,
         child: Padding(
