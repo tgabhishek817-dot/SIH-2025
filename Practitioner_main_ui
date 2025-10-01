@@ -23,15 +23,18 @@ class PractitionerDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Row(children: [_title('Therapy Center',22,FontWeight.bold),
+    Spacer(),
+    Icon(Icons.person_3_rounded,color: Colors.blue,),
+    SizedBox(width: 5,),
+    Column(children: [ _title('Dr. Sharma',18), _title('Ayurvedic Therapist',10) ],),],),),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _title("Practitioner Dashboard", 24, FontWeight.bold),
-                _text("Monitor your patients and therapy sessions!"),
-                _gap(),
+
                 _card([
                   _rowTitle("Smart Notifications", Icons.notifications_active, Colors.red),
                   _text("2 missed appointments", color: Colors.red),
