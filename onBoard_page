@@ -1,0 +1,130 @@
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class Onboard extends StatelessWidget {
+  const Onboard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+           Container(
+        child: ImageFiltered(imageFilter: ImageFilter.blur(sigmaX: 11,sigmaY: 11),
+        child:Container( decoration:BoxDecoration(
+          
+          image: DecorationImage(image: AssetImage("assets/background.jpeg"),fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.5),
+           BlendMode.lighten,
+           )
+          ),
+        ),),
+      ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 75.0),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 43.0),
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: const Offset(0, 0),
+                      )
+                    ]
+                  ),
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundColor: const Color.fromARGB(255, 72, 211, 77),
+                    child: Text("आ",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color:Colors.white),),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10,),
+            Center(child: Text('AyurBridge',style: GoogleFonts.poppins(fontSize: 28,fontWeight: FontWeight.w600,),)),
+            Text('Ayurvedic Panchkarma Management System',style:GoogleFonts.poppins(fontSize: 10,fontWeight:FontWeight.w500)),
+            SizedBox(height: 10,),
+            Container(
+              decoration: BoxDecoration(
+                color:const Color.fromARGB(255, 233, 213, 149),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              width: 227,
+              height: 25,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6.0),
+                    child: Icon(Icons.circle,color: Colors.amber,size: 10,),
+                  ),
+                  Center(child: 
+                  Text(' Ministry of AYUSH,Government of India',style: GoogleFonts.poppins(fontSize: 10,fontWeight: FontWeight.w500),)),
+                ],
+              ),
+            ),
+            SizedBox(height: 30,),
+            Text('Welcome! Please Select your role',style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.bold),),
+            SizedBox(height: 5,),
+            Text("Choose how you'll be using AyurSutra",style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize: 10),),
+            SizedBox(height: 30,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Card(
+                  color:Colors.white,
+                  child: Column(
+                    children: [IconButton(onPressed: (){},
+                     icon: Image.asset(
+                        'assets/face-5453349_1280.png',
+                        fit: BoxFit.cover,
+                        height: 100,
+                        width: 100,
+                     ) ),SizedBox(height: 20,),
+                      Text('Practitioner',style:GoogleFonts.poppins(fontSize: 18,fontWeight:FontWeight.w600)),
+                    ],
+                  ),
+                ),
+                // SizedBox(width: 10,),
+                Card(
+                  color: Colors.white,
+                  child: Column(
+                    children: [IconButton(onPressed: (){}, 
+                    icon: Image.asset(
+                        'assets/healthy.png',
+                        fit: BoxFit.cover,
+                        height: 100,
+                        width: 100,
+                      )),SizedBox(height: 20,),
+                      Text('Patient',style:GoogleFonts.poppins(fontSize: 18,fontWeight:FontWeight.w600)),
+                    ],
+                  ),
+                  elevation: 0,
+                ),
+              ],
+            ),
+            SizedBox(height: 10,),
+            ElevatedButton(onPressed: (){}, child: Text('Login',style:GoogleFonts.poppins(fontSize: 12,fontWeight:FontWeight.w600))),
+            SizedBox(height: 5,),
+            ElevatedButton(onPressed: (){}, child: Text("Register",style:GoogleFonts.poppins(fontSize: 12,fontWeight:FontWeight.w600))),
+          ],
+        ),
+      ),
+    ],
+  )
+);
+}
+}
